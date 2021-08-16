@@ -33,5 +33,6 @@ export const formatData = (data) => {
     finalData.datasets[0].data = priceArr;
 
     return finalData;
+
   };
   
