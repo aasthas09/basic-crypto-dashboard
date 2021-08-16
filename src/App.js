@@ -88,4 +88,33 @@ export default function App() {
     };
   }, [pair]);
 
+  const handleSelect = (e) => {
+    let unsubMsg = {
+      type: "unsubscribe",
+      product_ids: [pair],
+      channels: ["ticker"]
+    };
+    let unsub = JSON.stringify(unsubMsg);
+
+    ws.current.send(unsub);
+
+    setpair(e.target.value);
+  };
+  return (
+    <div className="container">
+      {
+        <select name="currency" value={pair} onChange={handleSelect}>
+          {currencies.map((cur, idx) => {
+            return (
+              <option key={idx} value={cur.id}>
+                {cur.display_name}
+              </option>
+            );
+          })}
+        </select>
+      }
+      <Dashboard price={price} data={pastData} />
+    </div>
+  );
+
 }
